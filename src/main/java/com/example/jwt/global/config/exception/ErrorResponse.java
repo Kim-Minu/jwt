@@ -1,6 +1,5 @@
 package com.example.jwt.global.config.exception;
 
-import com.gowiddata.dataVerification.global.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
