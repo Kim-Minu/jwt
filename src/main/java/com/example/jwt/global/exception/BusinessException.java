@@ -1,4 +1,4 @@
-package com.example.jwt.global.config.exception;
+package com.example.jwt.global.exception;
 
 public class BusinessException extends RuntimeException {
 

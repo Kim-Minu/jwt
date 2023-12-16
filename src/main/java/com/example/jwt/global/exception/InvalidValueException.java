@@ -1,8 +1,4 @@
-package com.example.jwt.global.config.exception;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package com.example.jwt.global.exception;
 
 public class InvalidValueException extends BusinessException {
 

@@ -1,4 +1,4 @@
-package com.example.jwt.global.config.exception;
+package com.example.jwt.global.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

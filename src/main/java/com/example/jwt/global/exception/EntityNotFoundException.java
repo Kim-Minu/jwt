@@ -1,9 +1,5 @@
-package com.example.jwt.global.config.exception;
+package com.example.jwt.global.exception;
 
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 public class EntityNotFoundException extends BusinessException {
 
