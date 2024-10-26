@@ -20,13 +20,16 @@ import java.util.List;
 public class TodoController {
     private final TodoService todoService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<TodoResponseDto>> list(@AuthenticationPrincipal User user) {
-        return new ResponseEntity<>(todoService.list(user), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<TodoResponseDto>> list (@AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(
+                todoService.list(user),
+                HttpStatus.OK
+        );
     }
 
-    @PostMapping("")
-    public ResponseEntity<TodoResponseDto> create(@RequestBody TodoCreateRequestDto requestDto, @AuthenticationPrincipal User user){
+    @PostMapping
+    public ResponseEntity<TodoResponseDto> create (@RequestBody TodoCreateRequestDto requestDto, @AuthenticationPrincipal User user){
 
         return new ResponseEntity<>(
                 todoService.create(requestDto, user),
@@ -35,14 +38,14 @@ public class TodoController {
 
     }
 
-    @PutMapping("")
-    public ResponseEntity<HttpStatus> update(@RequestBody TodoUpdateRequestDto requestDto, @AuthenticationPrincipal User user) {
+    @PutMapping
+    public ResponseEntity<HttpStatus> update (@RequestBody TodoUpdateRequestDto requestDto, @AuthenticationPrincipal User user) {
         todoService.update(requestDto, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{todoId}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable Long todoId, @AuthenticationPrincipal User user) {
+    public ResponseEntity<HttpStatus> delete (@PathVariable Long todoId, @AuthenticationPrincipal User user) {
 
         todoService.delete(todoId, user);
         return new ResponseEntity<>(HttpStatus.OK);

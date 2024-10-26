@@ -21,6 +21,7 @@ class TodoServiceTest {
     @DisplayName("todo_생성하기_테스트")
     @Test
     public void todo_생성하기_테스트() {
+
         Todo todo = Todo.builder()
                 .title("test")
                 .userId(1L)
@@ -31,9 +32,10 @@ class TodoServiceTest {
 
         Todo saveEntity = todoRepository.findById(todo.getId()).get();
 
-
         assertThat(saveEntity.getTitle()).isEqualTo(todo.getTitle());
 
     }
+
+
 
 }

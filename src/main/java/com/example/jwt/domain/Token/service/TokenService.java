@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 
-@RequiredArgsConstructor
+
 @Service
+@RequiredArgsConstructor
 public class TokenService {
 
     private final TokenProvider tokenProvider;

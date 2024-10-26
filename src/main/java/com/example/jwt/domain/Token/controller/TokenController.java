@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TokenController {
     private final TokenService tokenService;
 
-    @PostMapping("")
     public ResponseEntity<CreateAccessTokenResponseDto> createNewAccessToken(@RequestBody CreateAccessTokenRequestDto requestDto) {
         return new ResponseEntity<>(tokenService.createNewAccessToken(requestDto), HttpStatus.CREATED);
     }

@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,16 +22,34 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final String[] allowedUrls = {"/swagger-ui/**", "**/user/signUp", "**/user/signIn"};
+    private final String[] allowedUrls = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
+
+    private final String[] allowedApis = {
+            "/api/v1/signUp",
+            "/api/v1/signIn"
+    };
+
 
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers(allowedUrls);
+    }
 
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
 
         return http
                 .csrf(
-                        AbstractHttpConfigurer::disable
+                    AbstractHttpConfigurer::disable
                 )
                 .headers(
                         httpSecurityHeadersConfigurer ->
@@ -42,8 +61,10 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(
                         authorizationManagerRequestMatcherRegistry -> {
-                            authorizationManagerRequestMatcherRegistry.requestMatchers(allowedUrls).permitAll()
-                                    .anyRequest().authenticated();
+                            authorizationManagerRequestMatcherRegistry
+                                    .requestMatchers(allowedApis).permitAll()
+                                    .anyRequest()
+                                    .authenticated();
                         }
                 )
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

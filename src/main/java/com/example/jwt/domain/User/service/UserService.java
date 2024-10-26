@@ -27,12 +27,9 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public void signIn() {
-
-    }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
 
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException(email));
